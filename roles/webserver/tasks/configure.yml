@@ -1,0 +1,16 @@
+---
+# configure index.html
+
+- name: configure index.html
+  ansible.builtin.template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+    owner: root
+    group: root
+    mode: 0644
+
+- name: start httpd
+  ansible.builtin.systemd:
+    name: httpd
+    state: started
+    enabled: yes

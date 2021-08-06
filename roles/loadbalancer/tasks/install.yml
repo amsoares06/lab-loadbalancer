@@ -1,0 +1,9 @@
+---
+# install httpd server
+
+- name: install httpd
+  ansible.builtin.yum:
+    name: httpd
+    state: latest
+  notify:
+    - restart httpd

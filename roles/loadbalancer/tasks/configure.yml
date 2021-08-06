@@ -1,0 +1,31 @@
+---
+
+# create loadbalancer configuration
+
+- name: remove default conf files
+  file:
+    path: '/etc/httpd/conf.d/{{ item }}'
+    state: absent
+  with_items:
+    - autoindex.conf
+    - userdir.conf
+    - welcome.conf
+  notify: restart httpd
+
+- name: copy loadbalancer config file
+  ansible.builtin.template:
+    src: loadbalancer.conf.j2
+    dest: /etc/httpd/conf.d/loadbalancer.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart httpd
+
+- name: start httpd
+  ansible.builtin.systemd:
+    name: httpd
+    state: started
+    enabled: yes
+
+- name: config selinux to allow apache to make outbound connections
+  command: /usr/sbin/setsebool -P httpd_can_network_connect 1

@@ -1,0 +1,16 @@
+# setup.yml
+
+---
+  - hosts: webservers
+    become: true
+    roles:
+      - webserver
+    #vars_files:
+    #  - vars/default.yml
+
+  - hosts: loadbalancers
+    become: true
+    roles:
+      - loadbalancer
+    #vars_files:
+    #  - vars/default.yml

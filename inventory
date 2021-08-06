@@ -1,0 +1,8 @@
+# hosts
+
+[loadbalancers]
+lb01.localdomain.lan
+
+[webservers]
+web01.localdomain.lan bg_color='#33fffc'
+web02.localdomain.lan bg_color='#f6ff33'

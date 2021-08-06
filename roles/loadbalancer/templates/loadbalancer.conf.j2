@@ -1,0 +1,8 @@
+<proxy balancer://webset>
+{% for host in groups.webservers %}
+        BalancerMember http://{{ host }}:80
+{% endfor %}
+</proxy>
+
+ProxyPass "/web" "balancer://webset/"
+ProxyPassReverse "/web" "balancer://webset/"

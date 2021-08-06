@@ -1,0 +1,7 @@
+---
+# handlers file for roles/loadbalancer
+
+- name: restart httpd
+  ansible.builtin.systemd:
+    name: httpd
+    state: restarted
